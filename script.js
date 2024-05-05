@@ -1,17 +1,15 @@
 let hit = document.getElementById("hit");
 let clutter = ``;
 let bubblebox = document.querySelector(".gamebtm");
-let score = document.querySelector("#score");
-score.innerText = 0;
-
+let score = 0
 function randomHit() {
-    hit.innerText = Math.round(Math.random() * 20);
+    hit.innerText = Number(Math.round(Math.random() * 20));
 
 }
 
 function timeInterval() {
     let display = document.getElementById("time");
-    let time = 60;
+    let time = 20;
     let intervalId = setInterval(() => {
         display.innerText = time;
         if (time > 0) {
@@ -19,8 +17,7 @@ function timeInterval() {
         } else {
             clearInterval(intervalId); // Stop the interval
             console.log("Game over!");
-            clutter.innerHTML = `<h1>GAME END</h1>`;    
-            bubblebox.innerText = clutter
+            document.querySelector(".gamebtm").innerHTML = `<div id-"GameOver"><h1>Game Over</h1><h3>Your Score is ${score}</h3></div>`
         }
         
     }, 1000)
@@ -29,7 +26,7 @@ function timeInterval() {
 
 function bubbleGenerator() {
     for (let i = 1; i < 183; i++) {
-        clutter += `<div class="bubble"><p id=tocheck>${Math.round(Math.random() * 20)}</p></div>`
+        clutter += `<div class="bubble">${Math.round(Math.random() * 20)}</div>`
     }
     bubblebox.innerHTML = clutter
     clutter = ``
@@ -37,20 +34,17 @@ function bubbleGenerator() {
 
 function Checker() {
     bubblebox.addEventListener("click", (e) => {
-        let childNode = e.target.childNodes
-        childNode.forEach(element => {
-            if (e.target.classList.contains('bubble')) {
-                let inner = element.innerText;
-                if (inner === hit.innerText) {
-                    let currentScore = parseInt(score.innerText, 10);
-                    score.innerText = currentScore + 10;
-                    console.log("abc");
-                bubbleGenerator();
-                randomHit()
+        let clicked = e.target.innerText
+        if (clicked === hit.innerHTML) {
+            score +=10;
+            document.querySelector("#score").innerHTML = score
+        console.log(score);
+        randomHit();
+        bubbleGenerator();
 
-                }
-            }
-        });
+
+        
+       }
     })
 }
 
