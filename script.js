@@ -5,13 +5,13 @@ let score = document.querySelector("#score");
 score.innerText = 0;
 
 function randomHit() {
-    hit.innerText = Math.round(Math.random() * 10);
+    hit.innerText = Math.round(Math.random() * 20);
 
 }
 
 function timeInterval() {
     let display = document.getElementById("time");
-    let time = 2;
+    let time = 60;
     let intervalId = setInterval(() => {
         display.innerText = time;
         if (time > 0) {
@@ -29,7 +29,7 @@ function timeInterval() {
 
 function bubbleGenerator() {
     for (let i = 1; i < 183; i++) {
-        clutter += `<div class="bubble"><p id=tocheck>${Math.round(Math.random() * 10)}</p></div>`
+        clutter += `<div class="bubble"><p id=tocheck>${Math.round(Math.random() * 20)}</p></div>`
     }
     bubblebox.innerHTML = clutter
     clutter = ``
